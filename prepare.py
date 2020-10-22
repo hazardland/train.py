@@ -83,7 +83,8 @@ def prepare(file1_name, file2_name, file3_name):
 
         if len(history) >= backtrack:
             data.append(history[i-backtrack:i])
-            target.append(outcome(file1_row['close'], file1_close))
+            #target.append(outcome(file1_row['close'], file1_close))
+            target.append([file1_row['close']])
 
         print(
             str(i).rjust(3)+':',
@@ -107,5 +108,8 @@ def prepare(file1_name, file2_name, file3_name):
         file3_volume = file3_row['volume']
         history.append([file1_close, file1_volume, file2_close, file2_volume, file3_close, file3_volume])
         i += 1
+
+    print(data[len(data)-1])
+    print(color.cyan(target[len(target)-1]))
 
     return data, target

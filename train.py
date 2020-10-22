@@ -28,7 +28,7 @@ model.add(Dropout(0.35))
 model.add(LSTM(100, return_sequences=False))
 model.add(Dropout(0.35))
 
-model.add(Dense(3))
+model.add(Dense(1))
 # mean_squared_error, mean_squared_error
 model.compile(loss='mse', optimizer='rmsprop', metrics=['accuracy'])
 model.summary()
