@@ -21,22 +21,21 @@ print(color.red(target.shape))
 
 
 model = Sequential()
-model.add(LSTM(60, activation='relu', return_sequences=True, batch_input_shape=(None, 60, 6)))
-model.add(Dropout(0.2))
-model.add(LSTM(70, activation='relu', return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(90, activation='relu', return_sequences=True))
-model.add(Dropout(0.2))
-model.add(LSTM(140, activation='relu', return_sequences=False))
-model.add(Dropout(0.2))
+
+model.add(LSTM(60, return_sequences=True, batch_input_shape=(None, 60, 6)))
+model.add(Dropout(0.35))
+
+model.add(LSTM(100, return_sequences=False))
+model.add(Dropout(0.35))
+
 model.add(Dense(3))
-# mean_squared_error
-model.compile(loss='mean_absolute_error', optimizer='adam', metrics=['accuracy'])
+# mean_squared_error, mean_squared_error
+model.compile(loss='mse', optimizer='rmsprop', metrics=['accuracy'])
 model.summary()
 
 
 print(color.green('Starting training'))
-history = model.fit(data, target, epochs=5000)
+history = model.fit(data, target, epochs=100)
 
 model.save('train.model')
 
