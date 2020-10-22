@@ -4,7 +4,9 @@ import numpy as np
 from prepare import prepare
 import color
 
-data, target = prepare('./data/usdt_dash_2.csv', './data/usdt_btc_2.csv', './data/btc_dash_2.csv')
+data, target = prepare('./data/usdt_xrp_1.csv',
+                       './data/usdt_btc_1.csv',
+                       './data/btc_xrp_1.csv')
 
 model = keras.models.load_model('./train.model')
 

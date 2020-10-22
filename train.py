@@ -10,7 +10,9 @@ import matplotlib.pyplot as plt
 from prepare import prepare
 import color
 
-data, target = prepare('./data/usdt_dash.csv', './data/usdt_btc.csv', './data/btc_dash.csv')
+data, target = prepare('./data/usdt_xrp_2.csv',
+                       './data/usdt_btc_2.csv',
+                       './data/btc_xrp_2.csv')
 
 
 data = np.array(data, dtype=float)
