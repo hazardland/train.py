@@ -35,7 +35,7 @@ model.summary()
 
 
 print(color.green('Starting training'))
-history = model.fit(data, target, epochs=100)
+history = model.fit(data, target, epochs=2000)
 
 model.save('train.model')
 
