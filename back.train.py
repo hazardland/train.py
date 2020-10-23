@@ -3,6 +3,7 @@ import sys
 import numpy as np
 from keras.models import Sequential
 from keras.layers import LSTM
+from keras.layers import Input
 from keras.layers import Dense
 from keras.layers import Dropout
 import matplotlib.pyplot as plt
@@ -10,9 +11,9 @@ import matplotlib.pyplot as plt
 from prepare import prepare
 import color
 
-data, target = prepare('./data/usdt_xrp_2.csv',
-                       './data/usdt_btc_2.csv',
-                       './data/btc_xrp_2.csv')
+data, target = prepare('./data/XRP_usdt_xrp_1.csv',
+                       './data/XRP_usdt_btc_1.csv',
+                       './data/XRP_btc_xrp_1.csv')
 
 
 data = np.array(data, dtype=float)
@@ -22,22 +23,28 @@ target = np.array(target, dtype=float)
 print(color.red(target.shape))
 
 
+# model = Sequential()
+# model.add(LSTM(60, return_sequences=True, batch_input_shape=(None, len(data[0]), 6)))
+# model.add(Dropout(0.35))
+# model.add(LSTM(100, return_sequences=False))
+# model.add(Dropout(0.35))
+# model.add(Dense(1))
+# # mean_squared_error, mean_squared_error
+# model.compile(loss='mse', optimizer='rmsprop', metrics=['accuracy'])
+# model.summary()
+
+
 model = Sequential()
-
-model.add(LSTM(60, return_sequences=True, batch_input_shape=(None, 60, 6)))
-model.add(Dropout(0.35))
-
-model.add(LSTM(100, return_sequences=False))
-model.add(Dropout(0.35))
-
-model.add(Dense(1))
+model.add(Dense(units=16, input_shape=(len(data[0]), 6)))
+model.add(Dense(units=12))
+model.add(Dense(units=1))
 # mean_squared_error, mean_squared_error
 model.compile(loss='mse', optimizer='rmsprop', metrics=['accuracy'])
 model.summary()
 
 
 print(color.green('Starting training'))
-history = model.fit(data, target, epochs=2000)
+history = model.fit(data, target, epochs=100)
 
 model.save('train.model')
 

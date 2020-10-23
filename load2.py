@@ -1,16 +1,15 @@
 import keras
 import matplotlib.pyplot as plt
 import numpy as np
-from prepare import prepare
+from prep2 import prepare
 import color
+import sys
 
-data, target = prepare('./data/usdt_xrp_1.csv',
-                       './data/usdt_btc_1.csv',
-                       './data/btc_xrp_1.csv')
+data, target = prepare('./data/XRP_usdt_xrp_test.csv',
+                       './data/XRP_usdt_btc_test.csv',
+                       './data/XRP_btc_xrp_test.csv')
 
 model = keras.models.load_model('./train.model')
-
-
 
 pred = model.predict(np.array(data, dtype=float))
 
@@ -30,9 +29,9 @@ for item in data:
             pred_text = 'down'
 
         if real_text == pred_text:
-            print('real',color.cyan(target[i]), real_text, '| predict', color.cyan(pred[i]),  pred_text)
+            print('real', color.cyan(target[i]), real_text, '| predict', color.cyan(pred[i]), pred_text)
         else:
-            print('real', target[i], real_text, '| predict', pred[i],  pred_text)
+            print('real', target[i], real_text, '| predict', pred[i], pred_text)
 
     i += 1
 

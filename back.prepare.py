@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
@@ -68,7 +69,7 @@ def prepare(file1_name, file2_name, file3_name):
     file3_volume = None
 
     i = 0
-    backtrack = 60
+    backtrack = 30
     for index, file1_row in file1.iterrows():
         # print(color.cyan(index))
         #print(row)
@@ -83,8 +84,14 @@ def prepare(file1_name, file2_name, file3_name):
 
         if len(history) >= backtrack:
             data.append(history[i-backtrack:i])
+            print(color.green(str(i-backtrack)+':'+str(i)))
             #target.append(outcome(file1_row['close'], file1_close))
             target.append([file1_row['close']])
+
+        # if len(history) >= backtrack+1:
+        #     print(data)
+        #     print(target)
+        #     sys.exit()
 
         print(
             str(i).rjust(3)+':',
